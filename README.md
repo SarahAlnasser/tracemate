@@ -1,7 +1,7 @@
 # TraceMate
 
 Handwriting tracing device + monitoring website for students with Down syndrome.
-IT492 Graduation Project, Group 14, CCIS, IMAMU. Supervisor: Dr. Norah Alghamdi.
+IT492 Graduation Project, Group 14, CCIS, IMAMU. 
 
 ## Folders
 
