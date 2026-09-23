@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TraceMate | Log in</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="card">
+    <h1>TraceMate</h1>
+    <form id="login-form">
+      <label for="email">Email</label>
+      <input id="email" type="email" required>
+      <label for="password">Password</label>
+      <input id="password" type="password" required>
+      <button type="submit">Log in</button>
+      <p id="message"></p>
+    </form>
+  </main>
+  <script src="js/app.js"></script>
+  <script>
+    // Slice 3, week 2: send to auth.php, then go to dashboard.html
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        await api('auth.php', { method: 'POST', body: {
+          email: document.getElementById('email').value,
+          password: document.getElementById('password').value } });
+        location.href = 'dashboard.html';
+      } catch (err) {
+        document.getElementById('message').textContent = err.message;
+      }
+    });
+  </script>
+</body>
+</html>

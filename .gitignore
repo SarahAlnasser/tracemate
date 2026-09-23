@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Device runtime data (offline queue, saved attempts)
+device/data/*
+!device/data/.gitkeep
+
+# Secrets: each person keeps their own copy
+backend/config.php
+.env
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TraceMate | Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="page">
+    <h1>Dashboard</h1>
+    <p id="status">Checking backend...</p>
+    <!-- Slice 3, week 4: recent sessions, progress summary, alerts -->
+  </main>
+  <script src="js/app.js"></script>
+  <script>
+    api('health.php')
+      .then(d => document.getElementById('status').textContent =
+        `Backend OK. ${d.letter_templates} letter templates in the database.`)
+      .catch(err => document.getElementById('status').textContent = err.message);
+  </script>
+</body>
+</html>
