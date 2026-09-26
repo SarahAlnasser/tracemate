@@ -25,7 +25,7 @@ import os
 
 import pygame
 
-WIDTH, HEIGHT = 800, 480          # Raspberry Pi 7" screen size
+WIDTH, HEIGHT = 1024, 600          # Raspberry Pi 7" screen size
 BOX = HEIGHT - 40                 # square drawing area, same scale for x and y
 BOX_X = (WIDTH - BOX) // 2
 BOX_Y = (HEIGHT - BOX) // 2
