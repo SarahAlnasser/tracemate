@@ -31,15 +31,32 @@ def to_norm(px, py):
     return [round((px - BOX_X) / BOX, 4), round((py - BOX_Y) / BOX, 4)]
 
 
+TRACK_COLOR = (214, 228, 247)   # light blue path
+DOT_COLOR = (120, 150, 200)     # dotted center line
+START_COLOR = (46, 160, 90)     # green start badges
+badge_font = None
+
+
 def draw_template(screen, template):
-    band = max(4, int(template["tolerance"] * BOX * 2))
+    global badge_font
+    if badge_font is None:
+        badge_font = pygame.font.Font(None, 30)
+
+    # 1) soft rounded track + dotted center line
     for stroke in template["strokes"]:
         pts = [to_px(x, y) for x, y in stroke]
-        if len(pts) > 1:
-            pygame.draw.lines(screen, (225, 225, 225), False, pts, band)
-        else:
-            pygame.draw.circle(screen, (225, 225, 225), pts[0], band // 2)
-        pygame.draw.circle(screen, (120, 200, 140), pts[0], 10)   # where to start
+        for p in pts:
+            pygame.draw.circle(screen, TRACK_COLOR, p, 18)
+        for i, p in enumerate(pts):
+            if i % 3 == 0:
+                pygame.draw.circle(screen, DOT_COLOR, p, 3)
+
+    # 2) numbered start badges on top (1 = first stroke, 2 = second...)
+    for number, stroke in enumerate(template["strokes"], 1):
+        start = to_px(*stroke[0])
+        pygame.draw.circle(screen, START_COLOR, start, 16)
+        label = badge_font.render(str(number), True, (255, 255, 255))
+        screen.blit(label, label.get_rect(center=start))
 
 
 def save_attempt(name, strokes, attempt_no):
