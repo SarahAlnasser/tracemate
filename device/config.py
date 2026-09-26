@@ -6,7 +6,7 @@ TEMPLATES_DIR = ROOT.parent / "templates"
 AUDIO_DIR = ROOT / "audio"
 DATA_DIR = ROOT / "data"              # saved attempts + offline queue
 
-SCREEN_W, SCREEN_H = 800, 480         # Raspberry Pi 7" touchscreen
+SCREEN_W, SCREEN_H = 1024, 600        # GeeekPi 7" touchscreen
 FULLSCREEN = False                    # set True on the Pi
 
 API_URL = "http://192.168.1.10/tracemate/backend/api"
