@@ -85,7 +85,7 @@ def main(name):
         draw_template(screen, template)
         for s in strokes + ([current] if current else []):
             if len(s) > 1:
-                pygame.draw.lines(screen, (30, 90, 200), False, s, 6)
+                pygame.draw.lines(screen, (30, 90, 200), False, s, 10)
         screen.blit(font.render(status, True, (70, 70, 70)), (12, 10))
         pygame.display.flip()
         clock.tick(120)
