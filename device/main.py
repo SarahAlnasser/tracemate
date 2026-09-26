@@ -42,10 +42,10 @@ def draw_template(screen, template):
         pygame.draw.circle(screen, (120, 200, 140), pts[0], 10)   # where to start
 
 
-def save_attempt(name, strokes):
+def save_attempt(name, strokes, attempt_no):
     config.DATA_DIR.mkdir(exist_ok=True)
     path = config.DATA_DIR / f"attempt_{name}_{int(time.time())}.json"
-    data = {"template": name, "points": [[to_norm(x, y) for x, y in s] for s in strokes],
+    data = {"template": name,  "attempt_no": attempt_no, "points": [[to_norm(x, y) for x, y in s] for s in strokes],
             "created_at": time.strftime("%Y-%m-%dT%H:%M:%S")}
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False)
@@ -61,6 +61,7 @@ def main(name):
     font = pygame.font.Font(None, 26)
 
     strokes, current, status = [], None, "Trace the letter"
+    attempt_no = 0
     clock = pygame.time.Clock()
     running = True
     while running:
@@ -77,7 +78,8 @@ def main(name):
                 strokes.append(current)
                 current = None
                 if len(strokes) >= len(template["strokes"]):
-                    path = save_attempt(name, strokes)
+                    attempt_no += 1
+                    path = save_attempt(name, strokes, attempt_no)
                     # TODO week 4: score = accuracy.score(template, strokes) and show feedback
                     status = f"Saved {sum(map(len, strokes))} points to {path.name}. R = try again"
 
